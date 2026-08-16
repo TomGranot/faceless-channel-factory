@@ -1,0 +1,51 @@
+name: Feature request
+description: Propose a focused source, workflow, provider, or documentation improvement.
+title: "feature: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: Describe the job that the current repository cannot complete or explain safely.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Name the smallest contract, component, or document that would solve the problem.
+    validations:
+      required: true
+  - type: dropdown
+    id: boundary
+    attributes:
+      label: External boundary
+      options:
+        - No external service
+        - Source API, feed, or website
+        - Browser or renderer
+        - Voice provider
+        - Scheduler or social platform
+        - Analytics or alert provider
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: First-party evidence
+      description: Link current official documentation, terms, API limits, or platform support relevant to the request.
+  - type: textarea
+    id: gates
+    attributes:
+      label: Safety and human gates
+      description: Identify rights, billing, credentials, account ownership, privacy, or ambiguous-write decisions that must remain explicit.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This request contains no credentials, private account data, or live provider response dumps.
+          required: true

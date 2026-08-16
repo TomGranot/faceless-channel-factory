@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Faceless Channel"
+  short_description: "Build and operate a faceless video channel"
+  default_prompt: "Use $create-faceless-channel to design and set up a daily faceless video channel."

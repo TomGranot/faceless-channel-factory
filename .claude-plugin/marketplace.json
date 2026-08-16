@@ -1,0 +1,15 @@
+{
+  "name": "faceless-channel-tools",
+  "owner": {
+    "name": "Faceless Channel Factory maintainers"
+  },
+  "description": "Portable automation skills for evidence-led short-video channels.",
+  "plugins": [
+    {
+      "name": "faceless-channel-factory",
+      "source": ".",
+      "description": "Build, operate, measure, and repair evidence-led faceless short-video channels.",
+      "version": "1.0.0"
+    }
+  ]
+}

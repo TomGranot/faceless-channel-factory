@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "channels": [
+    {
+      "id": "channel-alpha",
+      "postizIntegrationId": "replace-with-channel-a-integration-id",
+      "instagramAccountId": "replace-with-channel-a-professional-account-id",
+      "accessTokenEnv": "CHANNEL_A_INSTAGRAM_ACCESS_TOKEN",
+      "keyword": "SOURCE",
+      "ctaLinePrefix": "On Instagram, comment SOURCE",
+      "sourceLinePrefix": "Open the source →",
+      "dmPrefix": "Here is the source:",
+      "ownUsername": "replace-with-channel-a-username"
+    },
+    {
+      "id": "channel-beta",
+      "postizIntegrationId": "replace-with-channel-b-integration-id",
+      "instagramAccountId": "replace-with-channel-b-professional-account-id",
+      "accessTokenEnv": "CHANNEL_B_INSTAGRAM_ACCESS_TOKEN",
+      "keyword": "DETAIL",
+      "ctaLinePrefix": "On Instagram, comment DETAIL",
+      "sourceLinePrefix": "See the source record:",
+      "dmPrefix": "Here is the source record:",
+      "ownUsername": "replace-with-channel-b-username"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Validate portable skill
+        run: python3 scripts/validate-skill.py .agents/skills/create-faceless-channel --strict
+
+      - name: Validate against the Agent Skills reference
+        run: uvx --from skills-ref agentskills validate .agents/skills/create-faceless-channel
+
+      - name: Verify JSON manifests
+        run: |
+          python3 -m json.tool .claude-plugin/plugin.json >/dev/null
+          python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
+          python3 -m json.tool .agents/skills/create-faceless-channel/evals/evals.json >/dev/null
+
+      - name: Run repository tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Run comment worker fixtures
+        run: npm --prefix services/instagram-comment-link-dms test
+
+      - name: Verify host adapters
+        run: |
+          test -L .claude/skills/create-faceless-channel
+          test -L skills/create-faceless-channel
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

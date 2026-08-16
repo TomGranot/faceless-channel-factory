@@ -1,0 +1,16 @@
+[
+  {
+    "id": "postiz-channel-a-fixture",
+    "content": "On Instagram, comment SOURCE and I’ll DM you the source link.\n\nOpen the source → https://example.com/project",
+    "releaseId": "ig-media-channel-a",
+    "state": "PUBLISHED",
+    "integration": {"id": "fixture-channel-a-instagram"}
+  },
+  {
+    "id": "postiz-channel-b-fixture",
+    "content": "On Instagram, comment DETAIL and I’ll DM you the source record.\n\nSee the source record: https://example.org/record/207039",
+    "releaseId": "ig-media-channel-b",
+    "state": "PUBLISHED",
+    "integration": {"id": "fixture-channel-b-instagram"}
+  }
+]

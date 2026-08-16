@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 2,
+  "slug": "source-led-demo",
+  "name": "Public Signal Daily",
+  "promise": "Three useful public signals, explained through their documented sources every day.",
+  "accounts": {
+    "mode": "new-brand",
+    "ownershipRequired": true,
+    "schedulerCredentials": "bring-your-own",
+    "humanSetup": {
+      "status": "required",
+      "requiredChecks": [
+        "owner-recovery-and-mfa-recorded",
+        "mobile-login-verified",
+        "desktop-login-verified",
+        "instagram-professional-enabled",
+        "facebook-page-created",
+        "facebook-page-linked-to-instagram",
+        "tiktok-account-created",
+        "scheduler-oauth-connected",
+        "private-post-reconciled"
+      ],
+      "completedChecks": []
+    }
+  },
+  "source": {
+    "kind": "api",
+    "entrypoint": "https://api.example.com/items",
+    "captureMode": "mobile-scroll",
+    "selectionRule": "Choose fresh, permitted records with one demonstrable idea and useful context.",
+    "rightsPolicy": "verify-before-publish"
+  },
+  "video": {
+    "aspectRatio": "9:16",
+    "targetSeconds": 35,
+    "visualTreatment": "source-scroll",
+    "voice": "generated",
+    "captions": "speech-aligned",
+    "cover": "first-useful-frame"
+  },
+  "publication": {
+    "platforms": ["instagram", "facebook", "tiktok"],
+    "postsPerDay": 3,
+    "timezone": "Europe/Amsterdam",
+    "windows": ["09:00-11:00", "14:00-16:00", "19:00-21:00"],
+    "scheduler": "postiz",
+    "story": {"mode": "full-video", "delayMinutes": 10, "interactiveLink": false}
+  },
+  "operations": {
+    "runtime": "exe-dev",
+    "browser": "anchor",
+    "analytics": "postiz",
+    "alerts": "agentmail",
+    "activityHistory": "git"
+  },
+  "budget": {"monthlyCeilingUsd": 100, "track": ["voice", "browser", "render", "storage", "scheduler", "worker"]}
+}

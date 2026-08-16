@@ -1,0 +1,9 @@
+{
+  "ig-media-channel-a": [
+    {"id": "comment-source", "text": "SOURCE please", "username": "fixture_reader", "timestamp": "2026-08-15T09:10:00.000Z"},
+    {"id": "comment-sourcer", "text": "Nice sourcebook", "username": "fixture_reader_2", "timestamp": "2026-08-15T09:11:00.000Z"}
+  ],
+  "ig-media-channel-b": [
+    {"id": "comment-detail", "text": "detail", "username": "fixture_reader_3", "timestamp": "2026-08-15T09:12:00.000Z"}
+  ]
+}

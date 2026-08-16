@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 2,
+  "slug": "git-trend-daily",
+  "name": "Git Trend Daily",
+  "promise": "One trending repository shown through its README in under a minute.",
+  "accounts": {
+    "mode": "new-brand",
+    "ownershipRequired": true,
+    "schedulerCredentials": "bring-your-own",
+    "humanSetup": {
+      "status": "required",
+      "requiredChecks": [
+        "owner-recovery-and-mfa-recorded",
+        "mobile-login-verified",
+        "desktop-login-verified",
+        "instagram-professional-enabled",
+        "facebook-page-created",
+        "facebook-page-linked-to-instagram",
+        "tiktok-account-created",
+        "scheduler-oauth-connected",
+        "private-post-reconciled"
+      ],
+      "completedChecks": []
+    }
+  },
+  "source": {
+    "kind": "repository",
+    "entrypoint": "https://github.com/trending",
+    "captureMode": "mobile-scroll",
+    "selectionRule": "Choose a trending permissively licensed repository with a readable README and one concrete use.",
+    "rightsPolicy": "verify-before-publish"
+  },
+  "video": {
+    "aspectRatio": "9:16",
+    "targetSeconds": 32,
+    "visualTreatment": "source-scroll",
+    "voice": "generated",
+    "captions": "speech-aligned",
+    "cover": "first-useful-frame"
+  },
+  "publication": {
+    "platforms": ["instagram", "facebook", "tiktok"],
+    "postsPerDay": 3,
+    "timezone": "Europe/Amsterdam",
+    "windows": ["09:00-11:00", "14:00-16:00", "19:00-21:00"],
+    "scheduler": "postiz",
+    "story": {"mode": "full-video", "delayMinutes": 10, "interactiveLink": false}
+  },
+  "operations": {
+    "runtime": "exe-dev",
+    "browser": "anchor",
+    "analytics": "postiz",
+    "alerts": "agentmail",
+    "activityHistory": "git"
+  },
+  "budget": {"monthlyCeilingUsd": 100, "track": ["voice", "browser", "render", "storage", "scheduler", "worker"]}
+}

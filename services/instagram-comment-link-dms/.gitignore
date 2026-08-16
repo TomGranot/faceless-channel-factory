@@ -1,0 +1,4 @@
+.env
+.env.local
+config/channels.local.json
+data/
