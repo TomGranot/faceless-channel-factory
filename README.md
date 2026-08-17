@@ -23,6 +23,7 @@
   <a href="#start-in-60-seconds">Quick start</a> ·
   <a href="#what-it-proved-in-live-trials">Live evidence</a> ·
   <a href="#how-it-differs-from-moneyprinterturbo">Comparison</a> ·
+  <a href="DISTRIBUTION.md">Distribution</a> ·
   <a href="docs/architecture.md">Architecture</a> ·
   <a href="ROADMAP.md">Roadmap</a>
 </p>
@@ -141,6 +142,18 @@ The skill treats publication as a stateful system:
 Choose MoneyPrinterTurbo when speed from topic to finished video is the main constraint. Choose this factory when the source itself is the story and each post needs defensible provenance, publishing state, analytics, and recovery.
 
 ## Install it
+
+List or install the portable skill through the open Skills CLI:
+
+```bash
+npx skills add <owner>/faceless-channel-factory --list
+npx skills add <owner>/faceless-channel-factory \
+  --skill create-faceless-channel \
+  -g
+```
+
+The CLI discovers the canonical package in `.agents/skills`. The repository also supports the host-specific routes below.
+Replace `<owner>` with the GitHub account or organization that hosts the repository.
 
 ### Claude Code plugin
 
@@ -314,6 +327,7 @@ The fixture-mode comment worker makes no provider request. Live comment replies 
 - [Review source permissions](docs/research/source-permissions-collection-and-package.md)
 - [Read the channel configuration reference](docs/channel-config.md)
 - [Review the changelog](CHANGELOG.md)
+- [Review distribution and release channels](DISTRIBUTION.md)
 - [See the roadmap](ROADMAP.md)
 - [Review host compatibility](docs/host-compatibility.md)
 - [Apply GitHub production settings](docs/github-settings.md)
