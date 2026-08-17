@@ -16,6 +16,7 @@ npm test
 npm run doctor
 npm run run:once
 npm run status
+npm run reconcile -- list
 ```
 
 Fixture mode makes no network request. Live reads need a Postiz key, one official Instagram professional-account token per channel, and `config/channels.local.json` copied from the example.
@@ -29,7 +30,29 @@ LIVE_CONFIRMATION=I_UNDERSTAND_INSTAGRAM_PRIVATE_REPLY_WRITES
 LIVE_UNLOCK_FILE=/absolute/path/to/a/user-created-mode-0600-file
 ```
 
-The worker holds one process lock across comment reads, state changes, and private replies. It sends one private reply through `/{instagram-account-id}/messages` with the triggering `comment_id`. A network timeout, HTTP 408, HTTP 429, server error, unreadable success response, or success response without a stable message ID becomes `uncertain`. The worker will not retry that comment automatically.
+The worker holds one renewable, owner-specific process lease across comment reads, state changes, and private replies. It sends one private reply through `/{instagram-account-id}/messages` with the triggering `comment_id`. A network timeout, HTTP 408, HTTP 429, server error, unreadable success response, or success response without a stable message ID becomes `uncertain`. A crash-stranded `sending` record becomes `uncertain` after 30 minutes. The worker will not retry either state automatically.
+
+## Reconcile an ambiguous reply
+
+Stop unattended polling before changing state. `list` reports only local record keys, states, error classes, and timestamps. Treat that output as private operating data.
+
+```bash
+npm run reconcile -- list
+
+npm run reconcile -- resolve \
+  --key 'channel-id:comment-id' \
+  --outcome confirmed-sent \
+  --provider-message-id 'confirmed-provider-message-id'
+```
+
+Use `confirmed-not-sent` only after checking the provider inbox and proving that no reply exists. This removes the deduplication record, so the next poll can send once:
+
+```bash
+npm run reconcile -- resolve \
+  --key 'channel-id:comment-id' \
+  --outcome confirmed-not-sent \
+  --confirmation I_VERIFIED_INSTAGRAM_DM_NOT_SENT
+```
 
 ## Enable the Mac worker
 

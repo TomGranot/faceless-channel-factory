@@ -1,4 +1,4 @@
-<!-- Hallmark · pre-emit critique: P5 H5 E4 S5 R4 V5 -->
+<!-- Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 -->
 
 <p align="center">
   <img src="docs/assets/readme-banner.png" alt="An impossible loom turning observable signals into one traceable ribbon of moving scenes" width="100%">
@@ -8,17 +8,17 @@
 
 <p align="center"><strong>Source-backed short-video channels, from discovery to recovery.</strong></p>
 
-<p align="center">
+<p>
   Turn licensed, public-domain, or otherwise permitted web sources into auditable videos, scheduled posts, analytics, and bounded repair.
 </p>
 
-<p align="center">
+<p>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f5c48.svg" alt="MIT license"></a>
   <a href=".agents/skills/create-faceless-channel/SKILL.md"><img src="https://img.shields.io/badge/Agent%20Skill-Codex%20%7C%20Claude%20Code%20%7C%20Cursor-315c87.svg" alt="Agent Skill for Codex, Claude Code, and Cursor"></a>
   <a href="#what-it-proved-in-live-trials"><img src="https://img.shields.io/badge/live%20trial-138%20published%20effects-b95f3b.svg" alt="138 published effects in a live trial"></a>
 </p>
 
-<p align="center">
+<p>
   <a href="#install-it"><strong>Install</strong></a> ·
   <a href="#start-in-60-seconds">Quick start</a> ·
   <a href="#what-it-proved-in-live-trials">Live evidence</a> ·
@@ -27,13 +27,16 @@
   <a href="ROADMAP.md">Roadmap</a>
 </p>
 
-Start with a source. The factory discovers candidates through documented APIs, feeds, repositories, or approved browser workflows; records source and rights evidence; captures the real page; renders the approved video; publishes through an idempotent outbox; and measures or repairs the result.
+Start with a source. The skill defines a pipeline for discovery through documented APIs, feeds, repositories, or approved browser workflows; source and rights evidence; capture; rendering; idempotent publishing; measurement; and repair. The implementation boundary below distinguishes shipped code from operator-supplied integrations.
 
 ## Start in 60 seconds
 
 No provider account or credential is required to scaffold a channel contract.
 
 ```bash
+git clone https://github.com/<owner>/faceless-channel-factory.git
+cd faceless-channel-factory
+
 python3 scripts/create-channel.py \
   --root channels \
   --slug public-signal-radar \
@@ -58,7 +61,7 @@ The scaffold writes a credential-free contract with rights gates, human account 
 | Channel scaffolding, validation, and explicit cost estimation | Browser capture, rendering, voice, and persistent worker infrastructure |
 | Contracts for evidence, rights, visual QA, publishing state, analytics, and bounded repair | Brand-owned social accounts and scheduler authorization |
 | A guarded Instagram comment-to-DM reference worker with fixture tests | Provider credentials, alert transport, and private operating state |
-| Production regressions distilled into acceptance tests | A human owner for rights, billing, account, and ambiguous-write gates |
+| Production regressions distilled into acceptance criteria and deterministic fixtures | A human owner for rights, billing, account, and ambiguous-write gates |
 
 Use it as a normal Agent Skill, an installable Claude Code plugin, or a production contract for a custom runtime. Generated media, live queues, account identifiers, analytics exports, and credentials stay outside Git.
 
@@ -77,15 +80,21 @@ Read the dated [source-permissions report](docs/research/source-permissions-coll
 
 ## What it proved in live trials
 
-One runtime supported:
+One anonymized runtime supported:
 
 - **2 unrelated content niches** built from different source types;
 - **6 destination integrations** across Facebook, Instagram, and TikTok;
 - **138 published effects** between August 1 and August 16, 2026;
-- **2 anonymized Instagram snapshots** with 7,859 views from 5,424 viewers and 286 interactions in one format, plus 2,356 views from 1,964 viewers and 99 interactions in the other; 98.6% and 99.7% of views came from non-followers;
 - missing analytics preserved as missing instead of reported as zero.
 
-The full [live-trial report](docs/live-trial.md) separates publication counts from account metrics, records incompatible platform definitions, and states the limits of the comparison.
+| Instagram snapshot | Format A | Format B |
+| --- | ---: | ---: |
+| Views | 7,859 | 2,356 |
+| Viewers | 5,424 | 1,964 |
+| Interactions | 286 | 99 |
+| Views from non-followers | 98.6% | 99.7% |
+
+The full [live-trial report](docs/live-trial.md) separates publication counts from account metrics, records incompatible platform definitions, and states the limits of the comparison. CI keeps these claims aligned with the [anonymized machine-readable summary](docs/evidence/live-trial-summary.json).
 
 ## What the skill does
 
@@ -104,6 +113,16 @@ The skill treats publication as a stateful system:
 - A failure alert starts bounded recovery. It does not finish recovery.
 - Missing analytics remain missing. The reporter never turns them into zero.
 - A comment CTA ships only when the matching per-post private-reply route works.
+
+### Implementation boundary
+
+| Stage | Status in this repository |
+| --- | --- |
+| Channel contract, validation, cost model | Shipped and covered by deterministic tests |
+| Rights, evidence, visual-QA, publishing, analytics, and repair policies | Shipped as Agent Skill contracts and acceptance criteria |
+| Instagram comment-to-DM route | Shipped as a guarded reference worker with fixture tests and manual reconciliation |
+| Source discovery, browser capture, voice, rendering, scheduling, analytics collection | Operator-supplied integrations; reference implementations remain on the roadmap |
+| Live media, credentials, queues, provider state | Deliberately excluded from Git |
 
 ## How it differs from MoneyPrinterTurbo
 
@@ -141,7 +160,7 @@ For marketplace installation, add the Git repository and install the plugin:
 /reload-plugins
 ```
 
-Replace `<owner>` with the Git host owner. Claude Code copies marketplace plugins into its plugin cache, so every bundled skill file must stay inside this repository.
+Replace `<owner>` with the GitHub account or organization that hosts the repository. Claude Code copies marketplace plugins into its plugin cache, so every bundled skill file must stay inside this repository.
 
 ### Codex and Cursor
 
@@ -151,7 +170,14 @@ Both discover the canonical project skill at:
 .agents/skills/create-faceless-channel/
 ```
 
-Clone the repository and work from its root, or link the skill into your user-wide Agent Skills directory:
+Clone the repository and work from its root. For a user-wide install on macOS, Linux, or Windows, use the copy-based installer:
+
+```bash
+python3 scripts/install-skill.py --host codex
+python3 scripts/install-skill.py --host cursor
+```
+
+The installer refuses to replace an existing skill. On Unix systems, you may link the canonical directory instead:
 
 ```bash
 mkdir -p ~/.agents/skills
@@ -163,7 +189,13 @@ Cursor may also use `~/.cursor/skills/`. Codex can attach optional UI metadata f
 
 ### Claude Code standalone skill
 
-The repository includes a project adapter at `.claude/skills/create-faceless-channel`. Claude Code 2.1.203 and later document directory-symlink discovery. On an older release, use the plugin path above or copy the canonical skill instead. For a user-wide standalone install, link the canonical skill:
+The repository includes a project adapter at `.claude/skills/create-faceless-channel`. Claude Code 2.1.203 and later document directory-symlink discovery. On an older release, use the plugin path above or copy the canonical skill instead. For a user-wide standalone copy:
+
+```bash
+python3 scripts/install-skill.py --host claude
+```
+
+On Unix systems, you may use a symlink instead:
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -215,7 +247,7 @@ TokPortal is an optional managed path for country-local TikTok and Instagram set
 
 ## Lessons captured from production
 
-The regression bank records the failures behind these rules:
+The regression bank records the failures behind these acceptance criteria:
 
 - **Rights stay in the machine record.** Verify license, source URL, retrieval time, and media hash before scripting. Keep routine compliance language out of narration and viewer-facing end cards.
 - **The opening frame needs its own QA.** A close detail can hold briefly while narration starts; the reveal can then accelerate. Sample early frames for dither, tiling, blanks, luminance spikes, and unexpected crops.
@@ -228,7 +260,7 @@ The regression bank records the failures behind these rules:
 - **A CTA creates an obligation.** Bind each published media ID to that post's destination URL. Persist reply intent, deduplicate by comment ID, and quarantine uncertain sends.
 - **Account state changes the experiment.** Record Professional conversion, Page linking, verification, and scheduler reconnection beside the analytics snapshot. Compare launch cohorts at fixed post ages.
 
-Read the complete acceptance tests in [production-regressions.md](.agents/skills/create-faceless-channel/references/production-regressions.md).
+Read the complete acceptance criteria in [production-regressions.md](.agents/skills/create-faceless-channel/references/production-regressions.md). The repository executes deterministic scaffold, package, installation, and worker fixtures in CI. Agent-behavior prompts in `evals/evals.json` remain evaluation specifications until a host-backed runner executes them.
 
 ## Repository map
 
@@ -250,7 +282,7 @@ Generated video, account configuration, live queues, analytics snapshots, and pr
 python3 scripts/validate-skill.py \
   .agents/skills/create-faceless-channel --strict
 
-uvx --from skills-ref agentskills validate \
+uvx --from 'skills-ref==0.1.1' agentskills validate \
   .agents/skills/create-faceless-channel
 
 python3 -m unittest discover -s tests -v
@@ -268,6 +300,7 @@ The fixture-mode comment worker makes no provider request. Live comment replies 
 - Log allowlisted opaque IDs, counts, states, durations, and error classes. Exclude authorization headers, cookies, prompts, account handles, raw provider responses, and full request bodies.
 - Scan the working tree and complete Git history before publishing.
 - Keep live account names, integration IDs, publication URLs, queue records, and analytics exports out of examples and reports.
+- Treat every binary asset as a privacy decision. The current allowlist contains one owner-approved banner portrait; CI rejects embedded text and EXIF metadata.
 
 ## Documentation
 
@@ -282,6 +315,8 @@ The fixture-mode comment worker makes no provider request. Live comment replies 
 - [Read the channel configuration reference](docs/channel-config.md)
 - [Review the changelog](CHANGELOG.md)
 - [See the roadmap](ROADMAP.md)
+- [Review host compatibility](docs/host-compatibility.md)
+- [Apply GitHub production settings](docs/github-settings.md)
 - [Contribute](CONTRIBUTING.md) or [get support](SUPPORT.md)
 
 ## License

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "doctor": "node src/doctor.mjs",
+    "reconcile": "node src/reconcile.mjs",
     "run:once": "node src/run-once.mjs",
     "status": "node src/status.mjs",
     "test": "node --test tests/*.test.mjs"

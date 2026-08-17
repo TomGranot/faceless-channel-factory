@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "privacy": "anonymized-aggregate-only",
+  "window": {
+    "start": "2026-08-01",
+    "end": "2026-08-16"
+  },
+  "contentNiches": 2,
+  "destinationIntegrations": 6,
+  "publishedEffects": 138,
+  "instagramSnapshots": [
+    {
+      "format": "A",
+      "views": 7859,
+      "viewers": 5424,
+      "interactions": 286,
+      "nonFollowerViewPercent": 98.6
+    },
+    {
+      "format": "B",
+      "views": 2356,
+      "viewers": 1964,
+      "interactions": 99,
+      "nonFollowerViewPercent": 99.7
+    }
+  ],
+  "excluded": [
+    "account names",
+    "handles",
+    "integration identifiers",
+    "publication URLs",
+    "raw analytics exports"
+  ]
+}

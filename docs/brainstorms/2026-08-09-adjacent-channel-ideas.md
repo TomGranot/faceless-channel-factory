@@ -47,7 +47,7 @@ Scores use a 1 to 10 scale: **N**ovelty, audience **V**alue, and implementation 
 19. **Standards Tech Tree** `[N9 V7 F7]` - Frame IETF drafts and RFC progress as capabilities unlocking in the internet's shared technology tree.
 20. **Unsolved Boss Fight** `[N7 V7 F7]` - Present a difficult Stack Exchange question as a boss encounter, then reveal the accepted or highest-scoring strategy.
 21. **Patent Puzzle** `[N8 V8 F8]` - Show patent figures as clues and ask viewers to identify the invention before revealing its title and abstract.
-22. **Collection Detail Reveal** `[N8 V9 F9]` - Start on an unusual detail from a rights-cleared museum object, unlock four factual clues, then reveal the complete artifact and its use.
+22. **Collection Detail Reveal** `[N8 V9 F9]` - Start on an unusual detail from a rights-cleared collection object, unlock four factual clues, then reveal the complete artifact and its use.
 
 ### Evergreen visual archives
 

@@ -24,7 +24,7 @@ Ask one blocking question at a time. Infer reversible editorial defaults. Do not
 
 ## Choose the execution branch
 
-- **Design only:** produce the channel contract, account checklist, architecture, cost range, and acceptance tests.
+- **Design only:** produce the channel contract, account checklist, architecture, cost range, and acceptance criteria.
 - **Scaffold:** run `scripts/scaffold_channel.py` and return the generated channel directory.
 - **Build:** scaffold first, then implement source, capture, render, publishing, and operations adapters in that order.
 - **Operate:** inspect the channel config, cloud timers, outbox, publication history, analytics, and failure alerts before changing production.

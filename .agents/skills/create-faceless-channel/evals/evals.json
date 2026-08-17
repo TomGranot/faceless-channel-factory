@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "skill": "create-faceless-channel",
   "evalSetVersion": "2026-08-16",
+  "executionStatus": "specification",
   "cases": [
     {
       "id": "routing-direct-create",

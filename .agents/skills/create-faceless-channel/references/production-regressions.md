@@ -1,6 +1,6 @@
 # Production recovery regressions
 
-Use these cases as acceptance tests when a channel changes failure handling.
+Use these cases as acceptance criteria when a channel changes failure handling.
 
 ## Museum API metadata points at a dead original image
 

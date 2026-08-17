@@ -5,8 +5,8 @@ The roadmap describes the next public milestones. It does not promise dates or p
 ## Public preview
 
 - Publish one reviewed, sanitized walkthrough from source evidence to validated channel state.
-- Tag the first release and document supported Agent Skills hosts.
-- Complete the repository's contribution and support surfaces.
+- Push the release commit, create the `v1.0.0` tag, and publish the matching GitHub release.
+- Expand automated host-discovery tests beyond the cross-platform copy installer.
 - Add the public project to a concise profile README and pin it after launch.
 - Verify the README, social preview, topics, and installation path from a logged-out browser.
 

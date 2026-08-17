@@ -98,6 +98,8 @@ def validate(skill: Path) -> tuple[list[str], list[str]]:
         else:
             if manifest.get("skill") != name:
                 errors.append("eval manifest skill must match frontmatter name")
+            if manifest.get("executionStatus") != "specification":
+                errors.append("eval manifest must declare executionStatus as specification until a host-backed runner executes it")
             cases = manifest.get("cases")
             if not isinstance(cases, list) or not cases:
                 errors.append("eval manifest needs a non-empty cases list")

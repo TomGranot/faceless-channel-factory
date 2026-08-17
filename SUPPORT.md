@@ -2,7 +2,7 @@
 
 ## Questions and setup help
 
-Use GitHub Discussions for channel design, installation, source-policy questions, and help interpreting the documented contracts. Search existing discussions before opening a new one.
+Use the setup-help issue form for channel design, installation, source-policy questions, and help interpreting the documented contracts. Search existing issues before opening a new one.
 
 Include:
 
@@ -18,7 +18,7 @@ Use the bug-report issue form for deterministic repository defects. A provider i
 
 ## Security and private data
 
-Follow [SECURITY.md](SECURITY.md) for vulnerabilities. Do not place credentials, private account data, or identifying operating records in issues or discussions.
+Follow [SECURITY.md](SECURITY.md) for vulnerabilities. Do not place credentials, private account data, or identifying operating records in issues.
 
 ## Service expectations
 

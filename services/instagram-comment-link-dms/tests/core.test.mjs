@@ -17,6 +17,7 @@ test("source URL extraction uses the channel-owned caption line", () => {
   assert.equal(sourceUrlFromCaption("Open the source → https://example.com/a.\nOther", "Open the source →"), "https://example.com/a");
   assert.equal(sourceUrlFromCaption("Random https://example.com/a", "Open the source →"), null);
   assert.equal(sourceUrlFromCaption("Open the source → https://127.0.0.1/private", "Open the source →"), null);
+  assert.equal(sourceUrlFromCaption("Open the source → https://%", "Open the source →"), null);
 });
 
 test("published campaigns bind an Instagram media ID to its own source URL", () => {
@@ -71,4 +72,36 @@ test("an uncertain write is persisted and never retried automatically", async ()
   assert.equal(second.deduplicated, 1);
   assert.equal(attempts, 1);
   assert.equal(state.comments["channel-alpha:c1"].status, "uncertain");
+});
+
+test("a stale sending intent is quarantined instead of remaining invisible", async () => {
+  const state = {
+    schemaVersion: 1,
+    comments: {
+      "channel-alpha:c1": {
+        status: "sending",
+        attemptedAt: "2026-08-17T08:00:00.000Z",
+      },
+    },
+  };
+  let saves = 0;
+  let sends = 0;
+  const summary = await runCycle({
+    posts: [{id: "p1", state: "PUBLISHED", releaseId: "m1", integration: {id: "fixture-channel-a"}, content: "On Instagram, comment SOURCE and I’ll DM you the source link.\nOpen the source → https://example.com/item"}],
+    channels,
+    listComments: async () => [{id: "c1", text: "SOURCE", username: "reader"}],
+    sendPrivateReply: async () => { sends += 1; return {id: "message-1"}; },
+    state,
+    saveState: async () => { saves += 1; },
+    writesEnabled: true,
+    maxWrites: 10,
+    now: () => new Date("2026-08-17T09:00:00.000Z"),
+    sendingStaleAfterMs: 30 * 60_000,
+  });
+  assert.equal(summary.quarantined, 1);
+  assert.equal(summary.deduplicated, 1);
+  assert.equal(sends, 0);
+  assert.equal(saves, 1);
+  assert.equal(state.comments["channel-alpha:c1"].status, "uncertain");
+  assert.equal(state.comments["channel-alpha:c1"].errorCode, "stale_sending_reconciliation_required");
 });
