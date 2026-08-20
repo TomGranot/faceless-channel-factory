@@ -15,6 +15,8 @@ Store each observation with one source label:
 
 Do not merge sources into one time series. Keep account totals separate from post totals. Keep missing values missing. Record the timezone, observation window, publication count, metric definition, and snapshot time beside each number.
 
+When one scheduler response reports zero views alongside non-zero lifetime likes or another contradictory lifetime engagement field, label the view count `unavailable` and preserve the supported engagement value with its lifetime definition. Do not treat the contradiction as zero performance or an operational alert. Verify the view metric through the platform-native source before using it in comparisons.
+
 When a scheduler returns no Instagram analytics but the owner sees followers and likes in the Instagram app, report both facts: the scheduler field is unavailable, and the platform-native snapshot shows the observed result. Never replace the missing scheduler field with the manual number.
 
 ## Measure launch behavior by cohort
