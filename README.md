@@ -22,6 +22,7 @@
   <a href="#install-it"><strong>Install</strong></a> ·
   <a href="#start-in-60-seconds">Quick start</a> ·
   <a href="#what-it-proved-in-live-trials">Live evidence</a> ·
+  <a href="docs/production-field-notes.md">Field notes</a> ·
   <a href="#how-it-differs-from-moneyprinterturbo">Comparison</a> ·
   <a href="DISTRIBUTION.md">Distribution</a> ·
   <a href="docs/architecture.md">Architecture</a> ·
@@ -275,6 +276,8 @@ The regression bank records the failures behind these acceptance criteria:
 
 Read the complete acceptance criteria in [production-regressions.md](.agents/skills/create-faceless-channel/references/production-regressions.md). The repository executes deterministic scaffold, package, installation, and worker fixtures in CI. Agent-behavior prompts in `evals/evals.json` remain evaluation specifications until a host-backed runner executes them.
 
+The [production field notes](docs/production-field-notes.md) put these failures in sequence. They use relative time and generic system roles so the operational lessons remain public without exposing the live channel, accounts, providers, identifiers, or infrastructure.
+
 ## Repository map
 
 ```text
@@ -319,6 +322,7 @@ The fixture-mode comment worker makes no provider request. Live comment replies 
 
 - [Build your first channel](docs/tutorial.md)
 - [Review the live-trial evidence](docs/live-trial.md)
+- [Read the production field notes](docs/production-field-notes.md)
 - [Add a channel to a worker](docs/how-to-add-a-channel.md)
 - [Set up accounts and credentials](docs/account-setup.md)
 - [Interpret analytics and experiments](.agents/skills/create-faceless-channel/references/analytics-and-experiments.md)

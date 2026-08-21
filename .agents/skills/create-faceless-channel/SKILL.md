@@ -60,7 +60,7 @@ Before committing a production budget, look up each provider's current official 
 
 1. **Discover:** fetch candidates from a documented API, feed, page, repository list, or approved scraper.
 2. **Select:** rank candidates and preserve the evidence behind every claim.
-3. **Capture:** use a real browser, scan the page, and reject blank, broken, loading, or unsuitable sources.
+3. **Capture:** use a real browser, scan the page, and reject blank, broken, loading, or unsuitable sources. Derive saved-image dimensions through a media decoder because remote browsers may return bytes that do not match the requested format or filename.
 4. **Write:** create varied scripts from source-specific facts. Reject repetition and malformed narration.
 5. **Render:** produce a vertical source-led video, speech-aligned captions, and a useful first frame. Treat caption token whitespace as data: normalize word separators, preserve whitespace in the caption container, and test sentence-boundary pages before approval.
 6. **Approve:** bind the approved render hash, rights state, destinations, and schedule.
@@ -82,6 +82,10 @@ Send one daily digest after a fresh analytics snapshot. Keep platform metrics se
 For cross-niche proof, snapshot every destination on one reporting date. Report publication counts for destinations whose analytics are empty, separate account metrics from post metrics, and disclose mismatched metric definitions. Compare normalized rates only when the numerator, denominator, observation window, and source match. Store public case studies as anonymized aggregates; keep handles, integration IDs, publication URLs, and raw responses in private operating records.
 
 Serialize activity writes and Git-backed history sync with one repository-wide lock. Release that lock before logging a sync failure.
+
+Keep generated files named by systemd `ReadWritePaths` outside immutable release directories. Link every writable path into the staged release before switching the active release, and retain the previous release until artifact counts and the service namespace pass verification.
+
+Keep a private, append-only incident ledger with exact evidence and verification. Use a hand-reviewed allowlist as the sole source for public field notes. Public notes use relative operating time and generic failure classes; they exclude channel identity, provider coordinates, account data, infrastructure, and exact dates.
 
 ## Accounts and credentials
 

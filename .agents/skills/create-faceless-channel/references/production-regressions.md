@@ -2,6 +2,58 @@
 
 Use these cases as acceptance criteria when a channel changes failure handling.
 
+## Rendered artifacts fail final publication eligibility
+
+Observed failure: a batch rendered its target number of media files, but one item failed the automatic publication contract. The renderer counted file creation as success, while the scheduler applied a stricter policy and found fewer eligible items than the batch promised.
+
+Required regression checks:
+
+- Apply the final publication policy before recording an item as rendered or counting it toward the batch target.
+- Treat source evidence, rights state, visual QA, manifest integrity, and destination policy as one final eligibility gate.
+- Preserve a rejected artifact for diagnosis, but do not expose it to the automatic scheduler.
+- Continue candidate scanning when supply remains. Fail the batch truthfully when no eligible replacement exists.
+- Test a fixture that produces a valid media file with an invalid publication manifest. The batch must not report its target as complete.
+
+## Recovery finishes after its supervisor deadline and cannot report
+
+Observed failure: a bounded repair worker declared timeout shortly before production verification passed. The active release lacked part of the reporting runtime, and an SSH relay masked the remote nonzero exit status. The operator could not distinguish a failed repair from a late success.
+
+Required regression checks:
+
+- Set the repair budget from the longest complete diagnosis, repair, and verification cycle, with a bounded margin.
+- Use a transport that preserves the remote command's exit status. Test both a known success and a known failure.
+- Distinguish worker timeout from production state. Reconcile the service after the worker stops before declaring the final outcome.
+- Stage and syntax-check every recovery-report script and service definition before switching releases.
+- Give each recovery one stable identity across dispatch, worker output, service verification, report storage, and operator delivery.
+- Test the case where production succeeds after the worker deadline. The final record must converge on the observed production state without replaying an irreversible effect.
+
+## Immutable release drops generated directories required by systemd
+
+Observed failure: an immutable release deployer persisted data and rendered output but left captures, voiceovers, and generated scroll tracks inside the old release. The new release omitted two paths listed in the service's `ReadWritePaths`. systemd exited with `226/NAMESPACE` before the application started, while valid source artifacts remained stranded in the preserved prior release.
+
+Required regression checks:
+
+- Inventory every mutable path named by production units, including nested public asset directories.
+- Store generated mutable paths outside immutable releases and link each path into the staged release before switching the active release.
+- Migrate existing artifacts without overwriting state. Keep the prior release until file counts and expected sizes match.
+- Create each state path and both parent directories before adding the release link. A tracked placeholder must not stand in for durable runtime storage.
+- Test a release fixture whose archive omits generated directories. The staged release must contain valid links for every systemd-writable path.
+- Run a no-op command with the production namespace restrictions before allowing the application service to start.
+- Verify provider and scheduler records with read-only queries before any recovery retry. A namespace repair does not authorize a publication mutation.
+
+## Remote browser returns JPEG bytes for a PNG capture path
+
+Observed failure: a remote CDP browser wrote JPEG bytes to a `.png` capture path despite an explicit PNG request. The capture worker read fixed PNG header offsets, interpreted JPEG header bytes as a width of 65536 pixels, and passed that false width to FFmpeg. Every otherwise valid candidate failed during tile creation.
+
+Required regression checks:
+
+- Request the intended screenshot format, then inspect the saved file through a decoder. Do not infer media type from the extension or browser option.
+- Read width and height from FFprobe, ImageMagick, or another decoder that supports every accepted input format.
+- Reject missing, zero, negative, or implausible dimensions before starting crop or tile work.
+- Test a fixture whose filename ends in `.png` while its bytes contain a valid JPEG. The worker must use the decoded JPEG dimensions.
+- Create every tile from the decoded dimensions and verify that the decoder can open each output tile.
+- Replay one affected capture through the production browser and sandbox before restarting a batch.
+
 ## Museum API metadata points at a dead original image
 
 Observed failure: the object metadata and public-domain gate passed, but the listed primary image returned `404` during source preparation. Another official rendition remained available.
