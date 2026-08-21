@@ -81,7 +81,7 @@ Send one daily digest after a fresh analytics snapshot. Keep platform metrics se
 
 For cross-niche proof, snapshot every destination on one reporting date. Report publication counts for destinations whose analytics are empty, separate account metrics from post metrics, and disclose mismatched metric definitions. Compare normalized rates only when the numerator, denominator, observation window, and source match. Store public case studies as anonymized aggregates; keep handles, integration IDs, publication URLs, and raw responses in private operating records.
 
-Serialize activity writes and Git-backed history sync with one repository-wide lock. Release that lock before logging a sync failure.
+Serialize activity writes and Git-backed history sync with one repository-wide lock. Release that lock before logging a sync failure. Push high-frequency evidence to a dedicated branch or repository so operational commits do not advance the deployable release branch.
 
 Keep generated files named by systemd `ReadWritePaths` outside immutable release directories. Link every writable path into the staged release before switching the active release, and retain the previous release until artifact counts and the service namespace pass verification.
 

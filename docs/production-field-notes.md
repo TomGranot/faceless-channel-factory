@@ -18,7 +18,7 @@ The automatic batch exhausted its candidate pool. The source gate admitted too f
 
 A later batch created three media files, but the scheduler found two eligible items. The renderer counted file creation as success before it ran the final publication policy. We moved that policy into the renderer's success condition. The renderer keeps a rejected artifact for diagnosis but excludes it from the publishable count.
 
-The activity writer also competed with a Git-backed history sync. Uncommitted state stopped the sync and left the audit trail behind production. We isolated history in its own clone and serialized writers. Application work no longer shares a worktree with evidence replication.
+The activity writer also competed with a Git-backed history sync. Uncommitted state stopped the sync and left the audit trail behind production. We isolated history in its own clone, serialized writers, and moved frequent evidence commits to a dedicated branch. Application work no longer shares a worktree or release branch with evidence replication.
 
 ## Day 6: retries need a failure class
 

@@ -2,6 +2,18 @@
 
 Use these cases as acceptance criteria when a channel changes failure handling.
 
+## Runtime evidence commits advance the deployable branch
+
+Observed failure: a production worker pushed append-only activity records to the same branch used for releases. A developer checkout fell behind by hundreds of operational commits even though its source code matched production, which obscured the small set of real code changes.
+
+Required regression checks:
+
+- Keep the runtime writer in a separate worktree and guard writes plus synchronization with one repository-wide lock.
+- Push frequent evidence to a dedicated branch or repository. Reserve the release branch for reviewed source, tests, and durable documentation.
+- Preserve local evidence when fetch, rebase, or push fails. A replica failure must not delete the primary operational record.
+- Link alerts and operator tools to the evidence branch rather than the release branch.
+- Test the sync refspec and reject any configuration that targets the deployable branch.
+
 ## Rendered artifacts fail final publication eligibility
 
 Observed failure: a batch rendered its target number of media files, but one item failed the automatic publication contract. The renderer counted file creation as success, while the scheduler applied a stricter policy and found fewer eligible items than the batch promised.
