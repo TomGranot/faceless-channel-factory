@@ -33,6 +33,10 @@ Meta allows a Professional Instagram account to run without a linked Facebook Pa
 
 Keep YouTube in the channel contract even when launch starts on three platforms. Before adding it to the live destination list, have the owner create a YouTube channel, choose its name and handle, review feature eligibility in YouTube Studio, complete any requested phone or identity verification, connect the scheduler, and publish one private Short. Standard access supports Shorts with a daily limit; verification or channel history can raise that limit. Use YouTube's current [channel creation](https://support.google.com/youtube/answer/1646861) and [feature eligibility](https://support.google.com/youtube/answer/9890437) guidance.
 
+### X (formerly Twitter) follow-up
+
+Keep X (formerly Twitter) in the channel contract even when launch starts on other platforms. Before adding it to the live destination list, have the owner create an X account, choose its name and handle, complete any requested phone or identity verification, connect the scheduler, and publish one private or disposable test post. This records the `x-account-created` check. Use X's current account-creation guidance for the exact steps.
+
 ### Managed in-country setup
 
 A managed operator can handle the device-local work when the owner needs accounts established in another country. TokPortal currently advertises local-phone account creation and publishing for TikTok and Instagram. It does not replace the Facebook Page, Meta linking, YouTube, owner-recovery, or acceptance-test steps. Before using it:

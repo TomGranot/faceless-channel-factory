@@ -35,6 +35,8 @@ def required_human_checks(platforms):
             "youtube-channel-created",
             "youtube-feature-eligibility-reviewed",
         })
+    if "x" in platforms:
+        checks.add("x-account-created")
     return checks
 
 
@@ -65,7 +67,7 @@ def main():
     if urlparse(entrypoint).scheme not in {"http", "https"}:
         errors.append("source.entrypoint must be an HTTP(S) URL")
     platforms = data.get("publication", {}).get("platforms", [])
-    if not platforms or set(platforms) - {"instagram", "facebook", "tiktok", "youtube"}:
+    if not platforms or set(platforms) - {"instagram", "facebook", "tiktok", "youtube", "x"}:
         errors.append("publication.platforms contains an unsupported value")
     human_setup = accounts.get("humanSetup", {})
     required = human_setup.get("requiredChecks")

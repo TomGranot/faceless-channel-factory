@@ -72,6 +72,22 @@ class ScaffoldTest(unittest.TestCase):
             self.assertIn("youtube-feature-eligibility-reviewed", checks)
             self.assertNotIn("instagram-professional-enabled", checks)
 
+    def test_x_scaffold_adds_future_platform_checks(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            subprocess.run([
+                sys.executable,
+                str(ROOT / "scripts/create-channel.py"),
+                "--root", temporary,
+                "--slug", "x-demo",
+                "--name", "X Demo",
+                "--source", "https://example.com/feed",
+                "--platforms", "x",
+            ], check=True, capture_output=True, text=True)
+            config = Path(temporary) / "x-demo/channel.json"
+            checks = json.loads(config.read_text())["accounts"]["humanSetup"]["requiredChecks"]
+            self.assertIn("x-account-created", checks)
+            self.assertNotIn("instagram-professional-enabled", checks)
+
     def test_refuses_overwrite(self):
         with tempfile.TemporaryDirectory() as temporary:
             command = [
