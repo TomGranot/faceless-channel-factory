@@ -57,7 +57,7 @@ An automatic experiment binds:
 - deterministic assignment salt;
 - exact application policy hash and receipt.
 
-Only treatments implemented by the channel runtime and named in the private allowlist may activate. The controller runs one experiment at a time. It promotes a passing variant into the baseline, reverts a loss or guard failure, and expires an inconclusive or starved test after the configured maximum.
+Only treatments implemented by the channel runtime and named in the private allowlist may activate. The controller runs one experiment at a time. A variant must pass on two separate weekly decisions before it becomes the baseline. The controller reverts a loss or guard failure immediately and expires an inconclusive or starved test after the configured maximum.
 
 Set the measurement start to the first publication that can contain the applied policy. Exclude content rendered or queued before activation even when it publishes later.
 

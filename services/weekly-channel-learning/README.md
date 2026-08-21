@@ -50,6 +50,7 @@ Set `autonomy.enabled` only after the owner authorizes self-adjustment. Configur
 - `measurementDelayHours` or `measurementStartsAt`: the first publication that can contain the new policy, excluding media already rendered or queued;
 - `maximumWeeks`: expiration for an inconclusive or starved test;
 - primary lift, loss, and guard-decline thresholds;
+- `promotionChecksRequired`: separate weekly passes required before the variant becomes the baseline;
 - an absolute private JSON-command application path.
 
 The application receives the channel, policy, policy hash, and idempotency key on standard input. It must apply the policy atomically and return `applied` or `already-applied` with the same policy hash. It should also return `effectiveAt`, the first publication not already rendered or queued when the policy was applied. The controller rejects any other receipt and uses `effectiveAt` as the measurement boundary.

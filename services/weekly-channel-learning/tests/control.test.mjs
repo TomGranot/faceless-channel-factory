@@ -30,3 +30,16 @@ test("only an allowlisted backlog experiment activates", () => {
   assert.equal(result.state.active.id, "proof");
   assert.equal(result.state.active.measurementStartsAt, "2026-08-21T10:00:00.000Z");
 });
+
+test("promotion requires passing on separate weekly decisions", () => {
+  const account = {slug: "example", autonomy: {enabled: true, promotionChecksRequired: 2}, experimentBacklog: []};
+  const active = {id: "proof", activatedAt: "2026-08-01T00:00:00.000Z", assignmentSalt: "salt", minimumPairs: 6, promotionChecks: 0};
+  const evidence = {matchedPairs: 6, primaryLift: 0.2, guardLift: 0};
+  const first = planControlTransition({account, control: {...emptyControlState("example"), active}, experimentEvidence: evidence, review: {status: "disabled"}, now: new Date("2026-08-21T00:00:00.000Z"), weekKey: "2026-W34", proposalHash: "one"});
+  assert.equal(first.action, "continued");
+  assert.equal(first.state.active.promotionChecks, 1);
+  const repeated = planControlTransition({account, control: first.state, experimentEvidence: evidence, review: {status: "disabled"}, now: new Date("2026-08-21T01:00:00.000Z"), weekKey: "2026-W34", proposalHash: "two"});
+  assert.equal(repeated.state.active.promotionChecks, 1);
+  const second = planControlTransition({account, control: repeated.state, experimentEvidence: evidence, review: {status: "disabled"}, now: new Date("2026-08-28T00:00:00.000Z"), weekKey: "2026-W35", proposalHash: "three"});
+  assert.equal(second.action, "promoted");
+});

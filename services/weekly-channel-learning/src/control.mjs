@@ -45,7 +45,21 @@ export function planControlTransition({account, control, experimentEvidence, rev
 
   if (control.active) {
     const decision = decideActiveExperiment({active: control.active, evidence: experimentEvidence, autonomy, now});
-    if (decision === "continue") return {state: control, action: "continued", evidence: experimentEvidence};
+    if (decision === "continue") {
+      const active = control.active.promotionChecks ? {...control.active, promotionChecks: 0, lastPromotionCheckWeek: null} : control.active;
+      return {state: {...control, active}, action: "continued", evidence: experimentEvidence};
+    }
+    if (decision === "promoted") {
+      const alreadyCounted = control.active.lastPromotionCheckWeek === weekKey;
+      const promotionChecks = (control.active.promotionChecks || 0) + (alreadyCounted ? 0 : 1);
+      if (promotionChecks < (autonomy.promotionChecksRequired ?? 2)) {
+        return {
+          state: {...control, active: {...control.active, promotionChecks, lastPromotionCheckWeek: weekKey}},
+          action: "continued",
+          evidence: experimentEvidence,
+        };
+      }
+    }
     const completed = {
       ...control.active,
       status: decision,
@@ -94,6 +108,8 @@ export function planControlTransition({account, control, experimentEvidence, rev
     minimumPairs: Math.max(autonomy.minimumPairs ?? 6, candidate.minimumPairs ?? 6),
     primaryMetric: "plays at fixed post age",
     guardMetric: "engagements per play",
+    promotionChecks: 0,
+    lastPromotionCheckWeek: null,
   };
   return {state: {...control, active}, action: "activated", evidence: null};
 }
