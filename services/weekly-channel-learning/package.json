@@ -1,0 +1,13 @@
+{
+  "name": "weekly-channel-learning",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "collect": "node src/cli.mjs collect",
+    "doctor": "node src/cli.mjs doctor",
+    "report": "node src/cli.mjs report",
+    "run": "node src/cli.mjs run",
+    "test": "node --test tests/*.test.mjs"
+  }
+}

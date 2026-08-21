@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "timezone": "Europe/Amsterdam",
+  "stateRoot": "~/Library/Application Support/faceless-channel-factory/weekly-learning",
+  "reviewer": {
+    "enabled": false,
+    "command": "codex",
+    "model": "gpt-5.6-luna",
+    "ffmpegCommand": "ffmpeg",
+    "maxImages": 6,
+    "timeoutMs": 600000
+  },
+  "accounts": [
+    {
+      "slug": "example-channel",
+      "label": "Example Channel",
+      "provider": {
+        "kind": "json-command",
+        "command": "/absolute/private/path/collector",
+        "options": {
+          "account": "replace-me"
+        }
+      },
+      "maturityHours": 72,
+      "cohortDays": 7,
+      "minimumCohortPosts": 3,
+      "minimumDecisionPosts": 6,
+      "autonomy": {
+        "enabled": false,
+        "allowedExperimentIds": ["first-frame-proof"],
+        "minimumPairs": 6,
+        "measurementDelayHours": 24,
+        "maximumWeeks": 4,
+        "minimumPrimaryLift": 0.1,
+        "maximumPrimaryLoss": 0.1,
+        "maximumGuardDecline": 0.1,
+        "application": {
+          "kind": "json-command",
+          "command": "/absolute/private/path/policy-application",
+          "options": {}
+        }
+      },
+      "reviewContext": "State the channel promise, audience, and visual format here.",
+      "topicRules": [
+        {"name": "specific-surprise", "patterns": ["hidden", "unexpected", "secret"]},
+        {"name": "tutorial", "patterns": ["how to", "step by step"]}
+      ],
+      "experimentBacklog": [
+        {
+          "id": "first-frame-proof",
+          "variable": "opening frame",
+          "control": "description or title first",
+          "variant": "visible proof or payoff first"
+        }
+      ]
+    }
+  ]
+}

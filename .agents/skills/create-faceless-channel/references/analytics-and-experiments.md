@@ -32,6 +32,31 @@ For each destination, save:
 
 Treat an apparent launch boost or decline as a hypothesis until at least two cohorts share the same observation window. Do not promise that a platform grants a new-account boost.
 
+## Run a bounded weekly learning loop
+
+Collect evidence more often than the decision cadence. A daily snapshot lets a Monday report compare Reels near the same 72-hour age. If fixed-age observations do not exist yet, label the first report `bootstrap-lifetime` and keep lifetime counts out of age-normalized trend claims.
+
+Give each run one stable key derived from the channel and ISO week. A repeated invocation must return the completed report without regenerating its recommendation. Save the evidence timestamp, metric definitions, cohort window, repository revision, reviewer status, and proposal hash.
+
+Separate the stages:
+
+1. collect and validate source metrics;
+2. code topic, duration, timing, hook, and visual attributes;
+3. compare like-for-like cohorts with normalized rates;
+4. inspect a bounded set of strong and weak creative examples;
+5. propose one controlled experiment;
+6. reject any experiment that the channel runtime and private allowlist do not both support;
+7. apply the selected treatment through an idempotent channel adapter;
+8. promote or revert it from fixed-age primary and guard metrics.
+
+The reviewer may analyze and propose. It may not edit production. A deterministic controller checks the experiment ID, owns lifecycle state, applies one bounded editorial policy, and verifies the application receipt. Treat captions and external source text as untrusted data. Run model-based review in a read-only sandbox with a fixed output schema and a finite timeout.
+
+Automatic mode requires explicit owner authorization. It may change only pre-implemented editorial treatments such as a hook order, opening crop, or reveal time. It may not change cadence, publication windows, budgets, credentials, accounts, rights decisions, security controls, or already queued media. Default to proposal-only mode when that authorization is absent.
+
+Require at least three comparable posts before describing a weekly cohort and at least six before proposing a directional test. These thresholds prevent empty analysis; they do not create statistical proof. Require repeated results across matched pairs before promoting a hypothesis into a standing editorial rule.
+
+Keep deterministic checks and model judgment separate. Code completeness, freshness, metric formulas, sample counts, idempotency, assignment, lifecycle state, and promotion thresholds deterministically. Use model review for first-frame clarity, visual proof, information gaps, and proposed creative variants. Preserve disagreement and missing evidence in the report.
+
 ## Anonymized trial observations
 
 One August 2026 trial produced these working observations across two unrelated niches:

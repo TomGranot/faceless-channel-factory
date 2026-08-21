@@ -4,7 +4,10 @@ This file records user-visible changes to the portable skill, plugin, reference 
 
 ## Unreleased
 
-No unreleased changes.
+### Added
+
+- A privacy-safe weekly channel-learning service with daily evidence snapshots, fixed-age cohorts, visual review, automatic experiment lifecycle state, idempotent policy adapters, and macOS LaunchAgent examples.
+- Regression tests for missing metrics, causal language, stable assignment, allowlisted activation, automatic promotion and rollback, and idempotent weekly runs.
 
 ## 1.0.0 - 2026-08-17
 

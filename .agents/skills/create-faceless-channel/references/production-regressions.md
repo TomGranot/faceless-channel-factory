@@ -2,6 +2,35 @@
 
 Use these cases as acceptance criteria when a channel changes failure handling.
 
+## One viral Reel rewrites the standing strategy
+
+Observed failure: a weekly optimizer treated one high-view Reel as proof, mixed posts of different ages, and changed topic, duration, posting time, and caption style together. The next batch could not identify which change helped.
+
+Required regression checks:
+
+- Preserve the metric source, definition, observation time, timezone, post age, and missing fields for every observation.
+- Compare posts near the same publication age. Label lifetime-counter bootstraps and exclude them from age-normalized trend claims.
+- Require a minimum comparable cohort and repeated matched pairs before promoting an observed split into a standing rule.
+- Separate deterministic validation from model judgment. An invalid or contradictory snapshot must produce `collect-more-evidence`, not a creative instruction.
+- Change one variable per proposed experiment and name the control, variant, fixed conditions, primary metric, guard metric, sample requirement, and decision rule.
+- Require explicit owner authorization before enabling automatic mode. Proposal-only mode remains the default.
+- Allow only experiment IDs implemented by the channel runtime and named in its private allowlist. Reject an invented or unsupported treatment.
+- Key the run by channel and ISO week. Running it twice must return the completed decision without another reviewer call or policy mutation.
+- Keep the reviewer read-only. A deterministic controller owns activation, stable assignment, minimum sample checks, promotion, and rollback.
+- Apply policies through an idempotent adapter and require a receipt for the exact policy hash before advancing lifecycle state.
+- Keep cadence, schedules, budgets, credentials, accounts, rights gates, security controls, and queued media outside the automatic loop.
+
+## Two scheduled readers race while creating their run lock
+
+Observed failure: a daily collector and weekly reporter started together. The second process found the new lock directory before the first process wrote its owner marker, classified it as stale, and removed it. The first process then failed while creating its lease file.
+
+Required regression checks:
+
+- Treat a lock directory without an owner marker as active while the directory modification time remains inside the stale threshold.
+- Refresh an owner-specific lease during a long reviewer run.
+- Remove a lock only when the releasing process still owns it.
+- Start collector and reporter together in a fixture. One may return `run_lock_busy`; neither may steal the other's directory or fail with a missing lease path.
+
 ## Runtime evidence commits advance the deployable branch
 
 Observed failure: a production worker pushed append-only activity records to the same branch used for releases. A developer checkout fell behind by hundreds of operational commits even though its source code matched production, which obscured the small set of real code changes.

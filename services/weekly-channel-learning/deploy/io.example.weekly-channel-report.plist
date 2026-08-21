@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>io.example.weekly-channel-report</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>/absolute/path/to/services/weekly-channel-learning/scripts/run-from-env.zsh</string>
+    <string>report</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    <key>WEEKLY_LEARNING_CONFIG</key>
+    <string>/absolute/private/path/config.json</string>
+  </dict>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key><integer>2</integer>
+    <key>Hour</key><integer>9</integer>
+    <key>Minute</key><integer>5</integer>
+  </dict>
+  <key>ProcessType</key><string>Background</string>
+  <key>StandardOutPath</key><string>/absolute/private/path/logs/report.log</string>
+  <key>StandardErrorPath</key><string>/absolute/private/path/logs/report.error.log</string>
+</dict>
+</plist>

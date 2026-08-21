@@ -21,7 +21,7 @@ The roadmap describes the next public milestones. It does not promise dates or p
 
 - Publish a durable outbox example with ambiguous-write reconciliation.
 - Add a bounded repair-dispatcher reference implementation.
-- Add a daily analytics snapshot example with missing-data tests.
+- Add platform-native retention and send-rate adapters to the weekly learning service.
 - Expand the comment-to-DM worker only through official supported platform paths.
 
 ## Release criteria

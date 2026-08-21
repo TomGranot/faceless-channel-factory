@@ -67,6 +67,8 @@ Before committing a production budget, look up each provider's current official 
 7. **Publish:** use an idempotent outbox. Schedule feed posts and platform-supported Stories as separate effects.
 8. **Observe:** log every mutation, collect platform metrics, send a concise daily operating digest, email failures, and change one variable per experiment.
 
+For a recurring optimization loop, run `services/weekly-channel-learning` with one daily evidence snapshot and one weekly decision. Keep the reviewer read-only. Leave autonomy disabled unless the owner explicitly requests automatic self-adjustment. In automatic mode, allow only named treatments that the channel runtime implements, run one experiment at a time, assign control and variant deterministically, and persist the experiment ID and arm in every content package. Compare posts near the same publication age. Promote a variant only after its fixed-age primary metric and guard metric pass configured thresholds. Revert a loss, guard failure, expired test, or insufficient-evidence test automatically. Keep cadence, schedules, budgets, credentials, account ownership, rights gates, and queued media outside the loop.
+
 When a CTA promises a link after a comment, treat fulfillment as part of publication rather than copy alone. Keep one per-post mapping from published media ID to destination URL, use an idempotent private-reply outbox, and verify the supported platform path before enabling the CTA.
 
 Stop before publication when rights, render integrity, account ownership, destination IDs, schedule, or recovery state is unclear.

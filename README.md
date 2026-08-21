@@ -285,6 +285,7 @@ The [production field notes](docs/production-field-notes.md) put these failures 
 .claude/skills/                           Claude project adapter
 .claude-plugin/                           Claude plugin and marketplace manifests
 services/instagram-comment-link-dms/      guarded comment-to-DM reference worker
+services/weekly-channel-learning/         bounded weekly experiment controller
 docs/                                     tutorials, reference, architecture, and research
 scripts/                                  repository-level wrappers and validation
 tests/                                    deterministic scaffold and package tests
@@ -326,6 +327,7 @@ The fixture-mode comment worker makes no provider request. Live comment replies 
 - [Add a channel to a worker](docs/how-to-add-a-channel.md)
 - [Set up accounts and credentials](docs/account-setup.md)
 - [Interpret analytics and experiments](.agents/skills/create-faceless-channel/references/analytics-and-experiments.md)
+- [Automate the weekly learning loop](docs/weekly-learning-loop.md)
 - [Understand the architecture](docs/architecture.md)
 - [Review source feasibility](docs/research/channel-source-feasibility.md)
 - [Review source permissions](docs/research/source-permissions-collection-and-package.md)

@@ -1,0 +1,12 @@
+{
+  "source": "fixture",
+  "profile": {"followers": 12, "posts": 8},
+  "posts": [
+    {"id":"1","shortcode":"one","url":"https://example.com/one","publishedAt":"2026-08-14T08:00:00.000Z","caption":"Hidden mechanism in plain sight","durationSeconds":22,"plays":900,"likes":36,"comments":2,"videoUrl":null,"thumbnailUrl":null},
+    {"id":"2","shortcode":"two","url":"https://example.com/two","publishedAt":"2026-08-14T12:00:00.000Z","caption":"A secret compartment","durationSeconds":25,"plays":800,"likes":24,"comments":1,"videoUrl":null,"thumbnailUrl":null},
+    {"id":"3","shortcode":"three","url":"https://example.com/three","publishedAt":"2026-08-15T16:00:00.000Z","caption":"An unexpected function","durationSeconds":29,"plays":700,"likes":21,"comments":0,"videoUrl":null,"thumbnailUrl":null},
+    {"id":"4","shortcode":"four","url":"https://example.com/four","publishedAt":"2026-08-15T20:00:00.000Z","caption":"Can you identify this object?","durationSeconds":34,"plays":180,"likes":3,"comments":0,"videoUrl":null,"thumbnailUrl":null},
+    {"id":"5","shortcode":"five","url":"https://example.com/five","publishedAt":"2026-08-16T08:00:00.000Z","caption":"Can you identify this painting?","durationSeconds":35,"plays":160,"likes":2,"comments":0,"videoUrl":null,"thumbnailUrl":null},
+    {"id":"6","shortcode":"six","url":"https://example.com/six","publishedAt":"2026-08-16T12:00:00.000Z","caption":"Can you identify this scene?","durationSeconds":36,"plays":140,"likes":2,"comments":0,"videoUrl":null,"thumbnailUrl":null}
+  ]
+}

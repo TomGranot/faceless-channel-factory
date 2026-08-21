@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "summary", "observations", "nextExperiment"],
+  "properties": {
+    "verdict": {
+      "type": "string",
+      "enum": ["propose-one-controlled-test", "collect-more-evidence"]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidence", "interpretation", "confidence"],
+        "properties": {
+          "evidence": {"type": "string"},
+          "interpretation": {"type": "string"},
+          "confidence": {"type": "string", "enum": ["low", "medium", "high"]}
+        }
+      }
+    },
+    "nextExperiment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "variable", "hypothesis", "control", "variant", "holdFixed", "minimumPairs", "primaryMetric", "guardMetric", "decisionRule"],
+      "properties": {
+        "id": {"type": "string"},
+        "variable": {"type": "string"},
+        "hypothesis": {"type": "string"},
+        "control": {"type": "string"},
+        "variant": {"type": "string"},
+        "holdFixed": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+        "minimumPairs": {"type": "integer", "minimum": 6, "maximum": 24},
+        "primaryMetric": {"type": "string"},
+        "guardMetric": {"type": "string"},
+        "decisionRule": {"type": "string"}
+      }
+    }
+  }
+}
