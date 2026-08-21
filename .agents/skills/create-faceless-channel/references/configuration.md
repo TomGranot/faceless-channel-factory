@@ -43,7 +43,7 @@ A paused channel preserves its artifacts but must not run discovery timers, purc
 - `humanSetup.requiredChecks`: machine-readable human steps derived from the destination list.
 - `humanSetup.completedChecks`: checks the owner or authorized operator has completed and verified.
 
-Every channel requires owner recovery and MFA, phone and desktop login checks, scheduler OAuth, and one reconciled private post. Instagram adds Professional-account, Facebook Page, and Page-linking checks. Facebook adds Page creation. TikTok adds account creation. YouTube adds channel creation and feature-eligibility review. The validator rejects `ready` while any required check remains incomplete.
+Every channel requires owner recovery and MFA, phone and desktop login checks, scheduler OAuth, and one reconciled private post. Instagram adds Professional-account, Facebook Page, and Page-linking checks. Facebook adds Page creation. TikTok adds account creation. YouTube adds channel creation and feature-eligibility review. X (formerly Twitter) adds account creation. The validator rejects `ready` while any required check remains incomplete.
 
 ## Video
 
@@ -56,7 +56,7 @@ Every channel requires owner recovery and MFA, phone and desktop login checks, s
 
 ## Publication
 
-- `platforms`: subset of `instagram`, `facebook`, `tiktok`, `youtube`.
+- `platforms`: subset of `instagram`, `facebook`, `tiktok`, `youtube`, `x`.
 - `postsPerDay`: integer from `1` to `10`.
 - `timezone`: IANA timezone.
 - `windows`: local time ranges. The scaffold creates three broad windows.

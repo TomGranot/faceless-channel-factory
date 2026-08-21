@@ -252,7 +252,7 @@ A human owner or authorized operator must:
 - control the recovery address, MFA, and backup codes;
 - switch Instagram to a Professional account;
 - create an owner-controlled Facebook Page and link it to Instagram;
-- create and verify TikTok, then create and verify YouTube when Shorts joins the channel;
+- create and verify TikTok, then create and verify YouTube when Shorts joins the channel and X (formerly Twitter) when it joins the channel;
 - approve each scheduler OAuth connection and reconcile one private or disposable post.
 
 Meta permits a standalone Professional Instagram account. This factory requires the linked Facebook Page for its full third-party publishing, cross-app inbox, analytics, and comment-reply workflow. See the [account setup guide](docs/account-setup.md) for the exact acceptance test.
