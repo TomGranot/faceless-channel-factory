@@ -34,6 +34,8 @@ A remote browser then returned valid image bytes in a format that did not match 
 
 A repair run outlived its supervisor budget and succeeded after the supervisor had reported failure. A missing report component and masked remote exit status hid the result. We aligned the budget with one full verification cycle, used a transport that preserves exit codes, and checked the reporting runtime during release staging. The recovery record can now converge on the production state that the operator observes.
 
+The release migration also exposed a capacity gap. A persistent browser cache existed, but the active release did not link to it, so the renderer could not find its executable. Old release bundles and generated media consumed the rest of the small worker disk. We added the browser cache to the path manifest, validate the executable before activation, retain one rollback release, and remove generated media after its retention window. Cleanup leaves durable operating state untouched and produces the same result when repeated.
+
 ## Operating model after two weeks
 
 We spent the first two weeks turning a media pipeline into a stateful production service:

@@ -95,6 +95,20 @@ Required regression checks:
 - Create every tile from the decoded dimensions and verify that the decoder can open each output tile.
 - Replay one affected capture through the production browser and sandbox before restarting a batch.
 
+## Missing browser-cache link and unbounded artifacts fill the worker disk
+
+Observed failure: an immutable-release migration moved the Playwright browser cache into persistent state but did not link it into the active release. The configured browser executable still pointed through the active-release path, so every render failed. Old code releases, generated scroll tracks, and rendered media also accumulated until the worker filesystem reached critical usage.
+
+Required regression checks:
+
+- Include every browser executable or cache path referenced by production configuration in the persistent-path manifest. Resolve and test the configured executable inside the staged release before activation.
+- Separate disposable MP3, MP4, PNG, and WAV artifacts from campaign records, outbox entries, analytics, delivery receipts, recovery reports, batch manifests, and history.
+- Give media cleanup a bounded retention window, a dry-run default, an explicit apply mode, and a report containing candidate counts and bytes.
+- Run cleanup twice against a fixture containing expired media, fresh media, and durable state. The second run must be a no-op, fresh media must remain, and durable state must match byte for byte.
+- Protect the active immutable release. Prune release history only after the new release becomes current, and keep one previous verified release for rollback.
+- Verify the active release target, browser executable, production namespace, filesystem usage, inode usage, timers, and failed services after remediation.
+- Break storage alerts down by persistent media, release bundles, package or browser caches, logs, and other top-level consumers instead of attributing a full disk to videos alone.
+
 ## Museum API metadata points at a dead original image
 
 Observed failure: the object metadata and public-domain gate passed, but the listed primary image returned `404` during source preparation. Another official rendition remained available.

@@ -251,6 +251,18 @@
         "Releases the lock before logging sync failure",
         "Adds a concurrency regression test"
       ]
+    },
+    {
+      "id": "failure-browser-cache-and-disk-retention",
+      "kind": "failure",
+      "prompt": "The worker is 96% full, old videos and immutable releases accumulated, and the configured Playwright browser path disappeared after a release switch. Clean it up and prevent recurrence.",
+      "assertions": [
+        "Preserves campaign, outbox, analytics, delivery, recovery, and history state",
+        "Links and validates the configured browser executable before release activation",
+        "Makes media cleanup bounded, dry-run-first, idempotent, and age-aware",
+        "Keeps the active release plus one rollback release and prunes older releases only after activation",
+        "Verifies disk usage, timers, failed services, and a production render after remediation"
+      ]
     }
   ]
 }

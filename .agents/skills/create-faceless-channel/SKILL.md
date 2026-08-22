@@ -87,6 +87,8 @@ Serialize activity writes and Git-backed history sync with one repository-wide l
 
 Keep generated files named by systemd `ReadWritePaths` outside immutable release directories. Link every writable path into the staged release before switching the active release, and retain the previous release until artifact counts and the service namespace pass verification.
 
+Give generated media an explicit retention window and keep it separate from campaign records, outbox state, analytics, delivery receipts, recovery reports, and history. Run cleanup through an idempotent command that defaults to a dry run, targets only declared media roots and formats, keeps fresh files, and reports reclaimed bytes. Link persistent browser executables or caches into every staged release and test the configured executable before activation. After the new release becomes current, keep it plus one verified rollback release and prune older code bundles. Recheck filesystem usage and failed services after cleanup.
+
 Keep a private, append-only incident ledger with exact evidence and verification. Use a hand-reviewed allowlist as the sole source for public field notes. Public notes use relative operating time and generic failure classes; they exclude channel identity, provider coordinates, account data, infrastructure, and exact dates.
 
 ## Accounts and credentials
