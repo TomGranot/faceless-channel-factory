@@ -263,6 +263,17 @@
         "Keeps the active release plus one rollback release and prunes older releases only after activation",
         "Verifies disk usage, timers, failed services, and a production render after remediation"
       ]
+    },
+    {
+      "id": "failure-launchagent-loses-ssh-agent",
+      "kind": "failure",
+      "prompt": "The recovery poller can SSH from Terminal but its macOS LaunchAgent fails every minute with Permission denied after clearing the environment.",
+      "assertions": [
+        "Passes SSH_AUTH_SOCK through the operational environment allowlist",
+        "Does not restore unrelated API keys or hardcode a per-login socket path",
+        "Tests the installed LaunchAgent through one read-only SSH poll",
+        "Keeps manual recovery available and reports the transport failure truthfully"
+      ]
     }
   ]
 }

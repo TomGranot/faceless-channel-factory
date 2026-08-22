@@ -36,6 +36,8 @@ A repair run outlived its supervisor budget and succeeded after the supervisor h
 
 The release migration also exposed a capacity gap. A persistent browser cache existed, but the active release did not link to it, so the renderer could not find its executable. Old release bundles and generated media consumed the rest of the small worker disk. We added the browser cache to the path manifest, validate the executable before activation, retain one rollback release, and remove generated media after its retention window. Cleanup leaves durable operating state untouched and produces the same result when repeated.
 
+The Mac recovery launcher had a second boundary error. It cleared inherited credentials before polling the worker, but also removed the SSH agent socket. Terminal access worked while scheduled polls failed. The launcher now passes the current user session's socket through the same narrow environment allowlist as the repair child, and its installed entry point must complete one read-only poll before unattended recovery counts as healthy.
+
 ## Operating model after two weeks
 
 We spent the first two weeks turning a media pipeline into a stateful production service:

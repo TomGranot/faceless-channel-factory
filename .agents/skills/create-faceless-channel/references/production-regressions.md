@@ -143,6 +143,19 @@ After the owner upgrades a subscription or restores quota:
 - Confirm the complete batch target and query the scheduler or platform for every required feed and Story record before declaring `verified_repair`.
 - Report the original quota evidence, the human gate that changed, the new invocation ID, successful provider evidence, final service result, and scheduled-effect counts.
 
+## Scrubbed macOS recovery launcher drops SSH authentication
+
+Observed failure: a macOS LaunchAgent cleared its environment before starting the recovery poller. The scrub removed unrelated credentials as intended, but it also removed `SSH_AUTH_SOCK`. The interactive terminal could reach the production host while every scheduled poll failed with `Permission denied`, so failure emails promised recovery that never started.
+
+Required regression checks:
+
+- Preserve only the operational environment allowlist needed by the poller and repair child. Include `SSH_AUTH_SOCK`; exclude API keys, tokens, and unrelated provider credentials.
+- Read the SSH agent socket from the current user launchd session or inherited LaunchAgent environment. Do not commit a per-login socket path.
+- Keep the environment filter in code so tests can assert the exact allowed names.
+- Install and reload the LaunchAgent, then run one read-only non-interactive SSH probe through its real entry point.
+- Require a zero launcher exit status and a poll result that names no unhandled failed units before calling the dispatcher healthy.
+- Keep manual recovery available when the poller is unavailable, but report the transport failure instead of claiming that automated repair was queued.
+
 ## Discovery API rate limit plus partial current-day data
 
 Observed failure: a broad registry discovery scan received HTTP 429 responses. A separate range query included the current day as a zero-count bucket, which would have produced a false 100 percent decline if the scorer treated it as a complete day.
