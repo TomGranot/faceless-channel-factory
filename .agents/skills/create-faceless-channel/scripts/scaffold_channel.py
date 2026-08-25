@@ -42,6 +42,8 @@ def required_human_checks(platforms):
             "youtube-channel-created",
             "youtube-feature-eligibility-reviewed",
         ])
+    if "x" in platforms:
+        checks.append("x-account-created")
     checks.extend([
         "scheduler-oauth-connected",
         "private-post-reconciled",
@@ -54,7 +56,7 @@ def main():
     if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", args.slug):
         raise SystemExit("--slug must use lowercase letters, numbers, and single hyphens.")
     platforms = [value.strip() for value in args.platforms.split(",") if value.strip()]
-    unknown = sorted(set(platforms) - {"instagram", "facebook", "tiktok", "youtube"})
+    unknown = sorted(set(platforms) - {"instagram", "facebook", "tiktok", "youtube", "x"})
     if unknown:
         raise SystemExit(f"Unsupported platforms: {', '.join(unknown)}")
     if not 1 <= args.posts_per_day <= 10:
@@ -127,6 +129,7 @@ def main():
         "POSTIZ_INSTAGRAM_INTEGRATION_ID=",
         "POSTIZ_FACEBOOK_INTEGRATION_ID=",
         "POSTIZ_TIKTOK_INTEGRATION_ID=",
+        "POSTIZ_X_INTEGRATION_ID=",
         "ANCHOR_BROWSER_API_KEY=",
         "ELEVENLABS_API_KEY=",
         "AGENTMAIL_API_KEY=",

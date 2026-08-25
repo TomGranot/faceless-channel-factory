@@ -18,8 +18,9 @@ The scaffold writes the exact platform checks to `accounts.humanSetup.requiredCh
 4. Create an owner-controlled Facebook Page and link it to Instagram.
 5. Create and verify the TikTok account on phone and desktop.
 6. Create the YouTube channel and review feature eligibility when Shorts joins the destination list.
-7. Complete each scheduler OAuth flow and verify the selected destination.
-8. Publish one private or disposable test through the production path.
+7. Create the X (formerly Twitter) account and verify it on phone and desktop when X joins the destination list.
+8. Complete each scheduler OAuth flow and verify the selected destination.
+9. Publish one private or disposable test through the production path.
 
 Meta makes the Facebook Page link optional for a standalone Professional Instagram account. Require the link for this factory's full third-party publishing, cross-app inbox, analytics, and comment-reply support. Keep the destination below `ready` if you choose the standalone path. Follow Meta's current [Professional account](https://www.facebook.com/help/instagram/502981923235522/) and [Page-linking](https://www.facebook.com/help/instagram/402748553849926) instructions.
 
