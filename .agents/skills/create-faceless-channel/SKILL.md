@@ -60,7 +60,7 @@ Before committing a production budget, look up each provider's current official 
 
 1. **Discover:** fetch candidates from a documented API, feed, page, repository list, or approved scraper.
 2. **Select:** rank candidates and preserve the evidence behind every claim.
-3. **Capture:** use a real browser, scan the page, and reject blank, broken, loading, or unsuitable sources. Derive saved-image dimensions through a media decoder because remote browsers may return bytes that do not match the requested format or filename.
+3. **Capture:** use a real browser, scan the page, and reject blank, broken, loading, or unsuitable sources. Derive saved-image dimensions through a media decoder because remote browsers may return bytes that do not match the requested format or filename. Sample mean luma of the cover still and the first hold of the source-scroll track; refuse an opening that is too dark for a phone feed. Keep the source-first cover. Do not treat underexposure as flicker.
 4. **Write:** create varied scripts from source-specific facts. Reject repetition and malformed narration.
 5. **Render:** produce a vertical source-led video, speech-aligned captions, and a useful first frame. Treat caption token whitespace as data: normalize word separators, preserve whitespace in the caption container, and test sentence-boundary pages before approval.
 6. **Approve:** bind the approved render hash, rights state, destinations, and schedule.

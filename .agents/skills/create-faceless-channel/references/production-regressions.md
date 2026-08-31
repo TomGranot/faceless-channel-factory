@@ -43,6 +43,18 @@ Required regression checks:
 - Link alerts and operator tools to the evidence branch rather than the release branch.
 - Test the sync refspec and reject any configuration that targets the deployable branch.
 
+## Git transport closes during activity-history pull
+
+Observed failure: an activity-history worker committed fresh evidence locally, then its SSH connection closed during `git pull`. The service failed with one local commit ahead of the evidence branch, and its failure event remained as an uncommitted append for the next sync.
+
+Required regression checks:
+
+- Preserve the local commit, the appended failure event, and every earlier history record. Do not reset, clean, or reclone the evidence worktree as recovery.
+- Distinguish a pull failure from an ambiguous push. A pull failure occurs before the provider mutation; an interrupted push requires remote-head reconciliation before any retry.
+- Before retrying a pull failure, confirm the repository lock is absent, inspect the worktree for only expected evidence changes, and run a read-only remote-ref query with the service's own Git identity.
+- Allow one bounded service retry or the next scheduled timer invocation after remote reads recover.
+- Verify the service result, active timer, clean worktree, and exact equality between the local commit and provider branch head. A zero process exit alone does not prove that the replica converged.
+
 ## Rendered artifacts fail final publication eligibility
 
 Observed failure: a batch rendered its target number of media files, but one item failed the automatic publication contract. The renderer counted file creation as success, while the scheduler applied a stricter policy and found fewer eligible items than the batch promised.
@@ -204,15 +216,31 @@ Required regression checks:
 - Prefer Remotion's matching Chrome Headless Shell for unattended rendering. If a desktop-browser render corrupts frames, keep internal concurrency fixed for the first differential retry so browser choice remains the only changed variable.
 - Preserve the corrupt file and validation report until the replacement passes, then remove or quarantine it through the normal artifact policy.
 
+
+## Dark source-first opening ships to a phone feed
+
+Observed failure: dark-mode product pages plus a source-first cover and a near-black caption overlay produced unreadable social openings. Capture quality scored DOM density, not mean luma, so the renderer counted the file as success and the scheduler published it.
+
+Required regression checks:
+
+- Sample mean luma of the exported cover still and the first ~1.4s hold of the scroll track. A dark percentile may be stored for diagnosis; mean luma is the publication gate.
+- Fail the final publication policy when the opening is too dark for a phone feed. Do not confuse this with flicker, tiling, or consecutive-frame luminance spikes.
+- Preserve the rejected artifact for diagnosis. Do not upload it or count it toward the automatic batch target.
+- Keep the source-first cover pattern. Reduce caption overlay opacity when the source hold is already dim, then still apply the luma gate to the composed cover.
+- Test a dark still fixture and a missing-sample failure. Remote browser retry must not treat underexposure as a capture-provider failure.
+
 ## Transient provider analytics read aborts the snapshot
 
-Observed failure: an item-level Postiz analytics GET returned HTTP 502 after the collector had completed other authenticated reads. The collector had no read retry, so one transient upstream response failed the service. Its atomic writer preserved the prior successful snapshot.
+Observed failure: an item-level Postiz analytics GET returned HTTP 502 after the collector had completed other authenticated reads. In a later incident, the bounded read retries exhausted on a network timeout and one fresh invocation succeeded after provider recovery. A growing-history `/posts` read later returned a misleading HTTP 401 while the same authenticated request succeeded when split into seven-day windows. In every case, the atomic writer preserved the prior successful snapshot.
 
 Required regression checks:
 
 - Retry read-only analytics requests after network failures, HTTP 429, and HTTP 5xx responses. Bound the retry budget and use exponential backoff; honor `Retry-After` when the provider sends it.
+- If a provider demonstrably emits intermittent false 401 responses for a still-valid key, allow bounded 401 retries only in the read-only telemetry client. Keep 401 terminal for mutation clients and stop after the retry budget when authentication does not recover.
 - Do not apply the analytics-read retry helper to create, update, delete, publish, cancel, or reschedule requests. Reconcile every ambiguous mutation before another attempt.
-- Test a 502 followed by a 200 response, a non-retryable 4xx response, and exhaustion after the configured attempt limit.
+- Test a 502 followed by a 200 response, a network timeout followed by a 200 response, a non-retryable 4xx response, and exhaustion after the configured attempt limit.
+- After retry exhaustion, require a successful authenticated read before one fresh service invocation. Do not add an unbounded outer retry layer.
+- Split growing-history list reads into bounded date windows and deduplicate records at inclusive window boundaries. Test the full historical span against a provider fixture that rejects oversized windows.
 - Write the new analytics snapshot atomically only after every required response passes validation. Preserve the last good snapshot when collection fails.
 - Before closing recovery, query the failed provider resource again, run one fresh collection, and verify the snapshot timestamp and generated report instead of relying on the service exit code alone.
 

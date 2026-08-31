@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "skill": "create-faceless-channel",
-  "evalSetVersion": "2026-08-16",
+  "evalSetVersion": "2026-08-31",
   "executionStatus": "specification",
   "cases": [
     {
@@ -108,6 +108,18 @@
         "Samples early frames for luminance spikes, tiling, blanks, and crops",
         "Rerenders the item in isolation with a matching headless browser",
         "Preserves the failed artifact until the replacement passes"
+      ]
+    },
+    {
+      "id": "failure-underexposed-opening",
+      "kind": "failure",
+      "prompt": "Two reels shipped with unreadable dark openings from dark-mode product pages and a near-black caption overlay. Keep the source-first cover.",
+      "assertions": [
+        "Samples mean luma of the cover still and the first source-scroll hold",
+        "Fails the final publication policy when the opening is too dark for a phone feed",
+        "Preserves the rejected artifact and does not publish it",
+        "Does not treat underexposure as flicker or a remote-browser retry",
+        "Keeps the source-first cover pattern"
       ]
     },
     {
